@@ -2,13 +2,14 @@
  * placss - plasterlang interpretation of how html and css should be combined for certain layout features
  */
 
-function placss() {
+function cssml() {
     //Run attribute checks on containers for extra alignment info
     flexContainers();
     gridContainers();
     fitContent();
     spacers();
     fixNavs();
+    iLabels();
     window.addEventListener("resize",function() {
         fitContent();
         fixNavs();
@@ -264,7 +265,24 @@ function stickyNav() {
         nav.style.top = `${headerHeight}px`;
     }
 }
+function iLabels() {
+    let ilabels = document.querySelectorAll('ilabel');
+    ilabels.forEach(function(ilabel){
+        let labelContent = ilabel.innerHTML;
+        let inputAttr = ilabel.attributes;
+
+        let label = createElement('label');
+        label.for = inputAttr.getNamedItem('id');
+        label.innerHTML = labelContent;
+
+        let input = createElement('input');
+        input.attributes = inputAttr;
+
+        ilabel.insertAdjacentElement('afterend', input);
+        ilabel.insertAdjacentElement('afterend', label);
+    });
+}
 
 
 //Add dependency to list
-addDeps(true, placss);
+addDeps(true, cssml);
