@@ -50,6 +50,7 @@ container, submenu {display: block;}
 item {display: list-item;}
 spacer {display: inline-block;}
 plaster {display: none;}
+ilabel {display: none;}
 
 //Submenu class and subhandlers
 nav.submenus {
@@ -102,7 +103,4 @@ nav.submenus {
   & > container > item > a {
     padding: 10px 20px 15px 20px;
   }
-}
-ilabel {
-  display: none;
 }

@@ -8,8 +8,8 @@ function cssml() {
     gridContainers();
     fitContent();
     spacers();
-    fixNavs();
     iLabels();
+    fixNavs();
     window.addEventListener("resize",function() {
         fitContent();
         fixNavs();
@@ -271,12 +271,17 @@ function iLabels() {
         let labelContent = ilabel.innerHTML;
         let inputAttr = ilabel.attributes;
 
-        let label = createElement('label');
-        label.for = inputAttr.getNamedItem('id');
+        let label = document.createElement('label');
+        label.for = inputAttr?.id.nodeValue;
         label.innerHTML = labelContent;
 
-        let input = createElement('input');
-        input.attributes = inputAttr;
+        let input = document.createElement('input');
+        for(let i = 0; ;i++) {
+            if(!inputAttr.item(i)) {
+                break;
+            }
+            input[inputAttr.item(i).nodeName] = inputAttr.item(i).nodeValue;
+        }
 
         ilabel.insertAdjacentElement('afterend', input);
         ilabel.insertAdjacentElement('afterend', label);
