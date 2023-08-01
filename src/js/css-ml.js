@@ -271,10 +271,6 @@ function iLabels() {
         let labelContent = ilabel.innerHTML;
         let inputAttr = ilabel.attributes;
 
-        let label = document.createElement('label');
-        label.for = inputAttr?.id.nodeValue;
-        label.innerHTML = labelContent;
-
         let input = document.createElement('input');
         for(let i = 0; ;i++) {
             if(!inputAttr.item(i)) {
@@ -283,8 +279,15 @@ function iLabels() {
             input[inputAttr.item(i).nodeName] = inputAttr.item(i).nodeValue;
         }
 
-        ilabel.insertAdjacentElement('afterend', input);
-        ilabel.insertAdjacentElement('afterend', label);
+        let label = document.createElement('label');
+        label.setAttribute('for', inputAttr.getNamedItem('id').nodeValue);
+        label.innerHTML = labelContent;
+
+        let container = document.createElement('div');
+        container.append(label, input);
+
+        ilabel.insertAdjacentElement('afterend', container);
+        ilabel.remove();
     });
 }
 
