@@ -1,0 +1,44 @@
+/* Layer scope to allow developers to still use their own styles */
+@layer cssml {
+  /* <grid> layouts */
+  grid {
+    display: grid;
+    gap: var(--grid-gap, 2px);
+  
+    /* Fallback for no attributes provided */
+    justify-items: stretch;
+    align-items: stretch;
+  }
+  
+  grid[gap] {
+    --grid-gap: attr(gap);
+  }
+  
+  grid[fill] {
+    justify-items: stretch;
+    align-items: stretch;
+  }
+  
+  grid > [colspan] { grid-column: attr(colspan); }
+  grid > [rowspan] { grid-row: attr(rowspan); }
+  
+  /* <flex> layouts */
+  flex {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  flex[wrap] { flex-wrap: wrap; }
+  flex[nowrap] { flex-wrap: nowrap; }
+  flex[wrap-reverse] { flex-wrap: wrap-reverse; }
+  flex[flow] { flex-flow: attr(flow); }
+  flex[dir] { flex-direction: attr(dir); }
+  flex[justify] { justify-content: attr(justify); }
+  flex[row] { flex-direction: row; }
+  flex[column] { flex-direction: column; }
+  flex[row-reverse] { flex-direction: row-reverse; }
+  flex[column-reverse] { flex-direction: column-reverse; }
+  
+  flex > [order] { order: attr(order, integer); }
+  flex > [flex-size] { flex: attr(flex-size); }
+}
