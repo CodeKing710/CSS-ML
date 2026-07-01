@@ -5,7 +5,7 @@
 
 //Pull in the CSS-ML stylesheet from the CDN if it hasn't been added yet
 const cssUrl = "https://cdn.jsdelivr.net/gh/CodeKing710/css-ml@main/css-ml.css"
-if(!document.querySelector(`link[href="$cssUrl"]`)) {
+if(!document.querySelector(`link[href="${cssUrl}"]`)) {
   const link = document.createElement("link")
   link.rel = "stylesheet"
   link.media = "screen"
