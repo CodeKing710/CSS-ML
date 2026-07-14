@@ -1,4 +1,19 @@
 /**
+Copyright (C) 2026  <Your Name or Organization>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://gnu.org>.
+
  * CSS-ML is a lightweight CSS framework that allows for easy alignment and layout of HTML elements using custom tags and attributes.
  * This JavaScript file provides the necessary functionality to process these custom tags and apply the appropriate CSS styles to achieve the desired layout.
  */
