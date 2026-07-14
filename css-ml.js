@@ -35,6 +35,7 @@ export function cssML() {
   flexContainers()
   gridContainers()
   stickyNavs()
+  sidebarButtons()
   /**PRIVATE FUNCTIONS */
   /**
    * Processes <flex> containers and applies the appropriate CSS styles based on the v-align and h-align attributes.
@@ -177,6 +178,33 @@ export function cssML() {
       
       window.addEventListener("scroll", handleScroll, {passive: true})
       window.addEventListener("resize", calcPos)
+    })
+  }
+
+  function sidebarButtons() {
+    const sidebars = document.querySelectorAll("sidebar[collapsed], sidebar[buttons]")
+
+    if(sidebars.length === 0) return
+
+    sidebars.forEach(sidebar => {
+      // Create sidebar toggle button
+      const toggleItem = document.createElement("item")
+      const toggleButton = document.createElement("a")
+      toggleButton.href = "javascript:void(0)"
+      toggleButton.textContent = "☰" // Hamburger icon
+      toggleItem.classList.add("sidebar-toggle")
+      toggleItem.appendChild(toggleButton)
+      sidebar.insertBefore(toggleItem, sidebar.firstChild)
+
+      // Toggle sidebar visibility on button click
+      toggleButton.addEventListener("click", () => {
+        // sidebar.classList.toggle("collapsed")
+        if(sidebar.hasAttribute('collapsed')) {
+          sidebar.removeAttribute('collapsed')
+        } else {
+          sidebar.setAttribute('collapsed','')
+        }
+      })
     })
   }
 }

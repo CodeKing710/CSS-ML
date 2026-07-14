@@ -197,4 +197,109 @@ along with this program.  If not, see <https://gnu.org>.
       }
     }
   }
+  
+  /* <sidebar> layouts */
+  sidebar {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--sidebar-width, 260px);
+    z-index: 30;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: width 0.2s ease-in-out;
+
+    &[collapsed] {
+      width: var(--sidebar-collapsed-width, 30px);
+    }
+
+    
+    /* Direct vertical item stacking */
+    & item {
+      display: flex;
+      flex-direction: column; /* Stack main item link and its dropdown vertically */
+      align-items: stretch;
+      justify-content: flex-start;
+      padding: 10px 15px;
+      width: 100%;
+      cursor: pointer;
+      user-select: none;
+      
+      /* CLose button layout */
+      & > .sidebar-toggle {
+        display: block;
+        width: var(--sidebar-toggle-width, min-content);
+        height: min-content;
+        padding: 10px 15px;
+        margin: -10px -15px;
+      }
+
+      & > :not(dropdown) {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 7px;
+        margin: -10px -15px; /* Negative margins to counteract padding for full-width clickable area */
+        text-decoration: none;
+        color: inherit;
+        width: 100%;
+      }
+
+      /* Vertical drop-down menu flow */
+      & dropdown {
+        display: none;
+        width: 100%;
+        padding-left: 20px; /* Indents dropdown-items inside the vertical flow */
+        margin-top: 5px;
+        margin-left: -15px;
+        margin-bottom: -10px;
+
+        & item {
+          padding: 8px 15px;
+          display: flex;
+          width: 100%;
+        }
+      }
+
+      /* Standard disclosure logic reveals nested items directly underneath */
+      &:hover > dropdown, &:focus-within > dropdown {
+        display: block;
+      }
+    }
+
+    /* Structural Collapse State */
+    &[collapsed] {
+      width: var(--sidebar-collapsed-width, 30px);
+      
+      /* Hide layout details or text elements cleanly when squeezed */
+      & item {
+        display: none;
+
+        &.sidebar-toggle {
+          display: block !important;
+        }
+      }
+    }
+  }
+
+  /* Wrapper containing sidebar layout adjustments */
+  wrapper:has(sidebar) {
+    main {
+      padding: 10px 10px 10px calc(var(--sidebar-width, 260px) + 10px);
+
+      & > * {
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+
+  wrapper:has(sidebar[collapsed]) {
+    main {
+      padding-left: var(--sidebar-collapsed-width, 35px);
+    }
+  }
 }
