@@ -5,7 +5,7 @@
 
 //Pull in the CSS-ML stylesheet from the CDN if it hasn't been added yet
 const cssUrl = "https://cdn.jsdelivr.net/gh/CodeKing710/css-ml@main/css-ml.css"
-if(!document.querySelector(`link[href="${cssUrl}"]`)) {
+if(!document.querySelector(`link[href*="css-ml.css"]`)) {
   const link = document.createElement("link")
   link.rel = "stylesheet"
   link.media = "screen"
@@ -19,6 +19,7 @@ export function cssML() {
   //Run attribute checks on containers for extra alignment info
   flexContainers()
   gridContainers()
+  stickyNavs()
   /**PRIVATE FUNCTIONS */
   /**
    * Processes <flex> containers and applies the appropriate CSS styles based on the v-align and h-align attributes.
@@ -118,6 +119,50 @@ export function cssML() {
         }
       }
     }
+  }
+
+  function stickyNavs() {
+    const navs = document.querySelectorAll("nav[sticky]")
+
+    if(navs.length === 0) return
+
+    navs.forEach(nav => {
+      let stickyPoint = 0
+      let isStuck = false
+
+      const calcPos = () => {
+        const wasStuck = nav.classList.contains("sticky")
+        if(wasStuck) nav.classList.remove("sticky")
+
+        const rect = nav.getBoundingClientRect()
+        stickyPoint = rect.top + window.scrollY
+
+        if(wasStuck) nav.classList.add("sticky")
+      }
+
+      calcPos()
+
+      let scrollTimeout
+      const handleScroll = () => {
+        if(!scrollTimeout) {
+          window.requestAnimationFrame(() => {
+            const shouldStick = window.scrollY >= stickyPoint
+            if(shouldStick && !isStuck) {
+              nav.classList.add("sticky")
+              isStuck = true
+            } else if(!shouldStick && isStuck) {
+              nav.classList.remove("sticky")
+              isStuck = false
+            }
+            scrollTimeout = null
+          })
+          scrollTimeout = true
+        }
+      }
+      
+      window.addEventListener("scroll", handleScroll, {passive: true})
+      window.addEventListener("resize", calcPos)
+    })
   }
 }
 
