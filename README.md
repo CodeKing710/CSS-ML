@@ -24,3 +24,15 @@ Most simple option here is to include this tag as it will pull in all the CSS-ML
 ```
 
 Note that this is a module and will be treated as such, and all code that needs run once the DOM is fully loaded will be run then as per the dependency usage in `loaded.js`
+
+## Features
+
+CSS-ML provides HTML tags to use for various container types such as `<flex>` and `<grid>`, as well as preformatted containers like `<wrapper>` that must follow a specific layout format to work properly.
+
+### Flex/Grid containers
+
+The flex and grid container tags allows attributes that are normally defined in CSS to be defined right there on the container. Items within will behave the way you want them to. Children items can have attributes for `order` and `flex-size` defined to allow the behaviour to be more predictable.
+
+*NOTE: All properties that get assigned with CSS to these tags are able to be overridden with your own CSS as the CSS-ML properties are defined within the cssml layer. No more worrying about using `!important` to force your changes that you want over the frameworks :)*
+
+**More documentation can be found at [CSS-ML Documentation](https://codeking710.github.com/css-ml)**
