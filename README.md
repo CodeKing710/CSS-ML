@@ -1,7 +1,7 @@
 # CSS-ML
 
-[![Latest Release](https://shields.io/github/v/release/CodeKing710/CSS-ML)](https://github.com/CodeKing710/CSS-ML/releases/latest)
-[![License GPL v3](https://shields.io/github/license/CodeKing710/CSS-ML)](https://github.com/CodeKing710/CSS-ML/LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/CodeKing710/CSS-ML?logoColor=green)](https://github.com/CodeKing710/CSS-ML/releases/latest)
+[![License GPL v3](https://img.shields.io/github/license/CodeKing710/CSS-ML)](https://github.com/CodeKing710/CSS-ML/LICENSE)
 
 CSS-ML is a non-HTML tag based renderer designed to automatically render your design based on CSS based APIs without all the extra hassle. Please note some knowledge of CSS is required to use these properly. CSS-ML **does not** provide theming as the goal is to be lightweight and to allow the developer flexibility on colors and layout decisions by providing preformats and components to make development easier without having to move between `.html` and `.css` files more than necessary. No more banging your head on the keyboard when trying to format your site pages :)
 
