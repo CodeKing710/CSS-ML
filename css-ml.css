@@ -1,0 +1,200 @@
+/*
+Copyright (C) 2026  <Your Name or Organization>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://gnu.org>.
+*/
+
+/* Layer scope to allow developers to still use their own styles */
+@layer cssml {
+  /* Base layouts */
+  * {
+    box-sizing: border-box;
+    font-size: 1em;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, Ubuntu, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body {
+    z-index: 0;
+    position: relative;
+  }
+
+  /* <wrapper> structure */
+  /*
+    Flex container that must be defined as
+    <wrapper>
+      <header>...</header>
+      <main>...</main>
+      <footer>...</footer>
+    </wrapper>
+  */
+  wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 1200px; /* Overrideable by user */
+    margin: 0 auto;
+    position: relative;
+    
+    & > * {
+      width: 100%;
+      position: relative;
+    }
+
+    & header {
+      position: relative;
+      padding: 5px 0;
+      text-align: center;
+    }
+
+    & main {
+      flex: 1;
+      position: relative;
+      padding: 10px;
+
+      & > * {
+        padding: 2px;
+        margin: 2px;
+      }
+    }
+
+    & footer {
+      height: 200px; /* Overrideable by user */
+      flex-shrink: 0;
+    }
+  }
+
+  /* <grid> layouts */
+  grid {
+    display: grid;
+    gap: var(--grid-gap, 2px);
+  
+    /* Fallback for no attributes provided */
+    justify-items: stretch;
+    align-items: stretch;
+    
+    &[gap] {
+      --grid-gap: attr(gap type(<length> | <percentage>), 2px);
+    }
+
+    &[fill] {
+      justify-items: stretch;
+      align-items: stretch;
+    }
+    
+    & > [colspan] { grid-column: attr(colspan, type(integer), 1); }
+    & > [rowspan] { grid-row: attr(rowspan, type(integer), 1); }
+  }
+
+  /* <flex> layouts */
+  flex {
+    display: flex;
+    flex-wrap: nowrap;
+
+    &[wrap] { flex-wrap: wrap; }
+    &[nowrap] { flex-wrap: nowrap; }
+    &[wrap-reverse] { flex-wrap: wrap-reverse; }
+    &[flow] { flex-flow: attr(flow); }
+    &[dir] { flex-direction: attr(dir); }
+    &[justify] { justify-content: attr(justify); }
+    &[row] { flex-direction: row; }
+    &[column] { flex-direction: column; }
+    &[row-reverse] { flex-direction: row-reverse; }
+    &[column-reverse] { flex-direction: column-reverse; }
+    
+    & > [order] { order: attr(order, type(integer), 0); }
+    & > [flex-size] { flex: attr(flex-size); }
+  }
+
+  /* <spacer> layouts */
+  spacer {
+    display: block;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    flex-grow: 1;
+
+    --size: 1rem;
+    width: var(--size);
+    height: var(--size);
+
+    &[h] {
+      flex-grow: 0;
+      height: attr(h type(<length> | <percentage>), 100%);
+    }
+    &[w] {
+      flex-grow: 0;
+      width: attr(w type(<length> | <percentage>), 100%);
+    }
+  }
+
+  /* <nav> layouts */
+  nav {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    z-index: 10;
+    overflow: visible;
+
+    &.sticky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    & item {
+      display: inline-flex;
+      justify-content: center;
+      flex: 1;
+      align-items: center;
+      position: relative;
+      padding: 5px 10px;
+      cursor: pointer;
+      user-select: none;
+
+      & a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        width: 100%;
+      }
+      
+      & dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        z-index: 20;
+  
+        & item {
+          display: flex;
+          width: 100%;
+          padding: 5px 10px;
+        }
+      }
+
+      &:hover > dropdown, &:focus-within > dropdown {
+        display: block;
+      }
+    }
+  }
+}
