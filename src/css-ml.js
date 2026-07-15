@@ -28,8 +28,8 @@ if(!document.querySelector(`link[href*="css-ml"][href$=".css"]`)) {
   document.head.appendChild(link)
 }
 
+let loadedJs;
 (async () => {
-  let loadedJs;
   try {
     loadedJs = await import('/js/loaded.js')
   } catch (e) {
