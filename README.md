@@ -20,9 +20,9 @@ Once those are in, CSS-ML will handle the rest, including a dependency factory c
 Most simple option here is to include this tag as it will pull in all the CSS-ML dependencies in one go:
 
 ```js
-<script type="module" src="https://cdn.jsdelivr.net/gh/CodeKing710/css-ml@main/css-ml.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/CodeKing710/css-ml@main/css-ml.min.js" defer></script>
 // OR for unminified
-<script type="module" src="https://cdn.jsdelivr.net/gh/CodeKing710/css-ml@main/src/css-ml.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/CodeKing710/css-ml@main/src/css-ml.js" defer></script>
 ```
 
 Note that this is a module and will be treated as such, and all code that needs run once the DOM is fully loaded will be run then as per the dependency usage in `loaded.js`
