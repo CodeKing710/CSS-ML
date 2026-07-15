@@ -236,7 +236,7 @@ function cssML() {
 }
 
 //Add dependency to list
-loadeJs.addDeps(loadedJs.createDep(cssML, true))
+loadedJs.addDeps(loadedJs.createDep(cssML, true))
 
 //Run installDeps
 loadedJs.installDeps()
