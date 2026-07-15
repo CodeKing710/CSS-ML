@@ -19,7 +19,7 @@ along with this program.  If not, see <https://gnu.org>.
  */
 
 //Pull in the CSS-ML stylesheet from the CDN if it hasn't been added yet
-const cssUrl = "https://cdn.jsdelivr.net/gh/CodeKing710/css-ml@main/css-ml.css"
+const cssUrl = "https://cdn.jsdelivr.net/gh/CodeKing710/css-ml@main/css-ml.min.css"
 if(!document.querySelector(`link[href*="css-ml.css"]`)) {
   const link = document.createElement("link")
   link.rel = "stylesheet"
