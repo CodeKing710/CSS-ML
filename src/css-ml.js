@@ -42,9 +42,8 @@ let loadedJs;
     }
   }
 })();
-// import { installDeps, addDeps, createDep } from ""
 
-export function cssML() {
+function cssML() {
   //Run attribute checks on containers for extra alignment info
   flexContainers()
   gridContainers()
