@@ -29,19 +29,17 @@ if(!document.querySelector(`link[href*="css-ml"][href$=".css"]`)) {
 }
 
 let loadedJs;
-(async () => {
+try {
+  loadedJs = await import('/js/loaded.js')
+} catch (e) {
+  // Try again from relative pathing
   try {
-    loadedJs = await import('/js/loaded.js')
+    loadedJs = await import('./loaded.js')
   } catch (e) {
-    // Try again from relative pathing
-    try {
-      loadedJs = await import('./loaded.js')
-    } catch (e) {
-      console.warn('Loading "loaded.js" from CDN...')
-      loadedJs = await import('https://cdn.jsdelivr.net/gh/CodeKing710/loaded.js@main/loaded.js')
-    }
+    console.warn('Loading "loaded.js" from CDN...')
+    loadedJs = await import('https://cdn.jsdelivr.net/gh/CodeKing710/loaded.js@main/loaded.js')
   }
-})();
+}
 
 function cssML() {
   //Run attribute checks on containers for extra alignment info
@@ -226,9 +224,6 @@ function cssML() {
     const bodyElements = Array.from(document.querySelectorAll('body > *'))
     const sidebar = document.querySelector('sidebar') || null
 
-    console.log(sidebar === null)
-    console.log(bodyElements)
-
     if(sidebar !== null) {
       if (bodyElements.includes(sidebar)) {
         // Set margin and padding classes to each item
@@ -241,7 +236,7 @@ function cssML() {
 }
 
 //Add dependency to list
-addDeps(createDep(cssML, true))
+loadeJs.addDeps(loadedJs.createDep(cssML, true))
 
 //Run installDeps
-installDeps()
+loadedJs.installDeps()
