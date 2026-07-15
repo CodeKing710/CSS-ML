@@ -34,6 +34,15 @@ along with this program.  If not, see <https://gnu.org>.
   body {
     z-index: 0;
     position: relative;
+    height: 100vh;
+  }
+  body sidebar {
+    position: fixed;
+  }
+
+  body > .no-wrapper-sidebar-pos {
+    margin-left: 30px;
+    padding-left: 5px;
   }
 
   /* <wrapper> structure */

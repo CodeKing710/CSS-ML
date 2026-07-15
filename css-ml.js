@@ -36,6 +36,7 @@ export function cssML() {
   gridContainers()
   stickyNavs()
   sidebarButtons()
+  noWrapperAdjustments()
   /**PRIVATE FUNCTIONS */
   /**
    * Processes <flex> containers and applies the appropriate CSS styles based on the v-align and h-align attributes.
@@ -206,6 +207,23 @@ export function cssML() {
         }
       })
     })
+  }
+
+  function noWrapperAdjustments() {
+    const bodyElements = Array.from(document.querySelectorAll('body > *'))
+    const sidebar = document.querySelector('sidebar') || null
+
+    console.log(sidebar === null)
+    console.log(bodyElements)
+
+    if(sidebar !== null) {
+      if (bodyElements.includes(sidebar)) {
+        // Set margin and padding classes to each item
+        bodyElements.forEach(element => {
+          if(element !== sidebar) element.classList.add('no-wrapper-sidebar-pos')
+        })
+      }
+    }
   }
 }
 
