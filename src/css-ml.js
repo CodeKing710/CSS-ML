@@ -20,7 +20,7 @@ along with this program.  If not, see <https://gnu.org>.
 
 //Pull in the CSS-ML stylesheet from the CDN if it hasn't been added yet
 const cssUrl = "https://cdn.jsdelivr.net/gh/CodeKing710/css-ml@main/css-ml.min.css"
-if(!document.querySelector(`link[href*="css-ml.css"]`)) {
+if(!document.querySelector(`link[href*="css-ml"][href$=".css"]`)) {
   const link = document.createElement("link")
   link.rel = "stylesheet"
   link.media = "screen"
@@ -28,7 +28,21 @@ if(!document.querySelector(`link[href*="css-ml.css"]`)) {
   document.head.appendChild(link)
 }
 
-import { installDeps, addDeps, createDep } from "https://cdn.jsdelivr.net/gh/CodeKing710/loaded.js@main/loaded.js"
+(async () => {
+  let loadedJs;
+  try {
+    loadedJs = await import('/js/loaded.js')
+  } catch (e) {
+    // Try again from relative pathing
+    try {
+      loadedJs = await import('./loaded.js')
+    } catch (e) {
+      console.warn('Loading "loaded.js" from CDN...')
+      loadedJs = await import('https://cdn.jsdelivr.net/gh/CodeKing710/loaded.js@main/loaded.js')
+    }
+  }
+})();
+// import { installDeps, addDeps, createDep } from ""
 
 export function cssML() {
   //Run attribute checks on containers for extra alignment info
